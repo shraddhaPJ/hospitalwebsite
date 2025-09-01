@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRC Hospital Institute</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <div class="logo-circle">C</div>
+        <div>
+          <div class="text-lg font-semibold">SRC Diabetes Institute</div>
+          <div class="text-sm text-gray-500">Diabetes Care & Multispeciality</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav id="mainNav" class="hidden md:flex gap-6 items-center text-sm">
+        <a href="#services" class="hover:text-blue-600">Services</a>
+        <a href="#doctors" class="hover:text-blue-600">Doctors</a>
+        <a href="#courses" class="hover:text-blue-600">Courses</a>
+        <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Enquire</a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="md:hidden p-2 rounded-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative bg-blue-50 py-20 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Comprehensive Diabetes Care</h1>
+    <p class="text-lg text-gray-600 mb-6">Expert care, research, and education under one roof</p>
+    <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Book an Appointment</a>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-semibold text-center mb-10">Our Services</h2>
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">Diabetes Care</h3>
+        <p class="text-gray-600">Comprehensive care for managing diabetes effectively.</p>
+      </div>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">Multispeciality</h3>
+        <p class="text-gray-600">Specialized care across multiple health disciplines.</p>
+      </div>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+        <h3 class="font-semibold text-lg mb-2">Research & Education</h3>
+        <p class="text-gray-600">Pioneering research and academic programs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enquiry Modal -->
+  <div id="enquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
+      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 text-2xl">&times;</button>
+      <h2 class="text-2xl font-semibold mb-4">Enquire Now</h2>
+      <form id="enquiryForm" class="space-y-4">
+        <input type="text" name="name" placeholder="Full Name" class="w-full border p-2 rounded" required>
+        <input type="email" name="email" placeholder="Email Address" class="w-full border p-2 rounded" required>
+        <input type="tel" name="phone" placeholder="Phone Number" class="w-full border p-2 rounded" required>
+        <textarea name="message" placeholder="Your Message" class="w-full border p-2 rounded"></textarea>
+        <button type="submit" class="btn-primary w-full">Submit</button>
+      </form>
+    </div>
+  </div>
+  <!-- Doctors Section -->
+<section id="doctors" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-3xl font-semibold text-center mb-10">Our Doctors</h2>
+  <div class="grid md:grid-cols-3 gap-8 text-center">
+    <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <img src="doctor1.jpeg" alt="Dr. A" class="w-24 h-24 mx-auto rounded-full mb-4">
+      <h3 class="font-semibold text-lg mb-1">Dr. A</h3>
+      <p class="text-gray-600">Endocrinologist</p>
+    </div>
+    <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <img src="doctor2.jpeg" alt="Dr. B" class="w-24 h-24 mx-auto rounded-full mb-4">
+      <h3 class="font-semibold text-lg mb-1">Dr. B</h3>
+      <p class="text-gray-600">Diabetologist</p>
+    </div>
+    <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <img src="doctor3.jpeg" alt="Dr. C" class="w-24 h-24 mx-auto rounded-full mb-4">
+      <h3 class="font-semibold text-lg mb-1">Dr. C</h3>
+      <p class="text-gray-600">Nutritionist</p>
+    </div>
+  </div>
+</section>
+<!-- Courses Section -->
+<section id="courses" class="max-w-6xl mx-auto px-6 py-16 bg-gray-50">
+  <h2 class="text-3xl font-semibold text-center mb-10">Our Courses</h2>
+  <div class="grid md:grid-cols-3 gap-8 text-center">
+    <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <h3 class="font-semibold text-lg mb-2">Diabetes Awareness Program</h3>
+      <p class="text-gray-600">Learn to manage diabetes through diet, exercise, and lifestyle changes.</p>
+    </div>
+    <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <h3 class="font-semibold text-lg mb-2">Nutrition & Meal Planning</h3>
+      <p class="text-gray-600">Understand how to plan balanced meals for diabetes care.</p>
+    </div>
+    <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <h3 class="font-semibold text-lg mb-2">Advanced Research Seminars</h3>
+      <p class="text-gray-600">For healthcare professionals interested in cutting-edge diabetes research.</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Scripts -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyDhQu4Cm9_6s4-T0AIsPS92ilwXbJHdPpA",
+    authDomain: "realestate-57b87.firebaseapp.com",
+    projectId: "realestate-57b87",
+    storageBucket: "realestate-57b87.appspot.com",
+    messagingSenderId: "718597394625",
+    appId: "1:718597394625:web:59ea900fad8ee603790440",
+    measurementId: "G-4B7GVMXH1S"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const form = document.getElementById("enquiryForm");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const message = form.message.value;
+
+    try {
+      // Write directly to this fixed document
+      await setDoc(
+        doc(db, "hospital enquiries", "gSBbmkOBRxKff4YG0dQx", "hospitalenquiries", "U3DQp4xeh5GAjRSBWaRk"),
+        {
+          name,
+          email,
+          phone,
+          message,
+          timestamp: new Date()
+        }
+      );
+
+      alert("✅ Enquiry submitted successfully!");
+      form.reset();
+      closeModal();
+    } catch (error) {
+      console.error("Firestore write failed:", error);
+      alert("❌ Failed to submit. Please try again.");
+    }
+  });
+</script>
+
+  <script>
+    // Modal functions
+    function openModal() {
+      document.getElementById("enquiryModal").classList.remove("hidden");
+    }
+    function closeModal() {
+      document.getElementById("enquiryModal").classList.add("hidden");
+    }
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const nav = document.getElementById('mainNav');
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
