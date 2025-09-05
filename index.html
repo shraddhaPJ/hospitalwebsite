@@ -124,36 +124,38 @@
   </section>
 
   <!-- Firebase & Form Handling -->
-  <script type="module">
-    import { db } from "./firebase.js";
-    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+ <!-- Firebase & Form Handling -->
+<script type="module">
+  import { db } from "./firebase.js";
+  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 
-    const form = document.getElementById("enquiryForm");
+  const form = document.getElementById("enquiryForm");
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const name = form.name.value;
-      const email = form.email.value;
-      const phone = form.phone.value;
-      const message = form.message.value;
+    const name = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const message = form.message.value;
 
-      try {
-        // Add new enquiry to nested collection
-        await addDoc(
-          collection(db, "hospital enquiries", "gSBbmkOBRxKff4YG0dQx", "hospitalenquiries"),
-          { name, email, phone, message, timestamp: new Date() }
-        );
+    try {
+      // Add new enquiry under /hospital enquiries/gSBbmkOBRxKff4YG0dQx/hospitalenquiries
+      await addDoc(
+        collection(db, "hospital enquiries", "gSBbmkOBRxKff4YG0dQx", "hospitalenquiries"),
+        { name, email, phone, message, timestamp: new Date() }
+      );
 
-        alert("✅ Enquiry submitted successfully!");
-        form.reset();
-        closeModal();
-      } catch (error) {
-        console.error("Firestore write failed:", error);
-        alert("❌ Failed to submit. Please try again.");
-      }
-    });
-  </script>
+      alert("✅ Enquiry submitted successfully!");
+      form.reset();
+      closeModal();
+    } catch (error) {
+      console.error("Firestore write failed:", error);
+      alert("❌ Failed to submit. Please try again.");
+    }
+  });
+</script>
+
 
   <!-- Modal & Menu Script -->
   <script>
