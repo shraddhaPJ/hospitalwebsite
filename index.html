@@ -6,20 +6,83 @@
   <title>SRC Hospital Institute</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .btn-primary {
-      @apply bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition;
+    /* Custom colors */
+    :root {
+      --blue-600: #2563eb;
+      --blue-900: #0b4aa3;
     }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f7fef7;
+      color: #1a2e05;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Logo */
     .logo-circle {
-      @apply w-10 h-10 flex items-center justify-center rounded-full bg-teal-500 text-white font-bold text-lg;
+      width: 2.6rem;
+      height: 2.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--blue-600), #14b8a6);
+      box-shadow: 0 4px 14px rgba(37,99,235,0.12);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--blue-600);
+      color: white;
+      padding: 0.6rem 0.9rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+      transition: transform 0.12s ease, opacity 0.12s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    /* Hero Image */
+    .hero-img {
+      width: 100%;
+      height: 24rem;
+      object-fit: cover;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    /* Cards */
+    .service-card, .doctor-card, .course-card {
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 6px 20px rgba(15,23,42,0.04);
+      overflow: hidden;
+      transition: transform 0.18s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover, .doctor-card:hover, .course-card:hover {
+      transform: translateY(-6px);
+    }
+
+    /* Modal transition */
+    #enquiryModal {
+      transition: opacity 0.25s ease;
     }
   </style>
 </head>
-<body class="font-sans bg-gradient-to-b from-teal-50 via-white to-blue-50 text-gray-800">
+<body class="bg-gradient-to-b from-teal-50 via-white to-blue-50">
 
   <!-- Header / Navbar -->
   <header class="bg-white shadow sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <!-- Logo -->
       <div class="flex items-center gap-3">
         <div class="logo-circle">C</div>
         <div>
@@ -28,11 +91,14 @@
         </div>
       </div>
 
-      <!-- Navigation -->
+      <!-- Desktop Navigation -->
       <nav id="mainNav" class="hidden md:flex gap-6 items-center text-sm">
+        <a href="#hero" class="hover:text-teal-600">Home</a>
         <a href="#services" class="hover:text-teal-600">Services</a>
         <a href="#doctors" class="hover:text-teal-600">Doctors</a>
         <a href="#courses" class="hover:text-teal-600">Courses</a>
+        <a href="#faq" class="hover:text-teal-600">FAQ</a>
+        <a href="#testimonials" class="hover:text-teal-600">Testimonials</a>
         <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Enquire</a>
       </nav>
 
@@ -43,75 +109,68 @@
         </svg>
       </button>
     </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="mobileNav" class="md:hidden hidden bg-white border-t shadow-lg">
+      <div class="flex flex-col px-6 py-4 gap-3">
+        <a href="#hero" class="hover:text-teal-600">Home</a>
+        <a href="#services" class="hover:text-teal-600">Services</a>
+        <a href="#doctors" class="hover:text-teal-600">Doctors</a>
+        <a href="#courses" class="hover:text-teal-600">Courses</a>
+        <a href="#faq" class="hover:text-teal-600">FAQ</a>
+        <a href="#testimonials" class="hover:text-teal-600">Testimonials</a>
+        <a href="javascript:void(0)" onclick="openModal()" class="btn-primary text-center">Enquire</a>
+      </div>
+    </nav>
   </header>
 
+ 
   <!-- Hero Section -->
-  <section class="relative py-20 text-center">
-    <img src="hospital-bg.jpeg" alt="Hospital Background" class="absolute inset-0 w-full h-full object-cover">
-    <div class="absolute inset-0 bg-white bg-opacity-70"></div>
-    <div class="relative z-10 max-w-3xl mx-auto px-6">
-      <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Comprehensive Diabetes Care</h1>
-      <p class="text-lg text-gray-600 mb-6">Expert care, research, and education under one roof</p>
-      <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Book an Appointment</a>
-    </div>
-  </section>
+<section id="hero" class="relative w-full h-screen">
+  <!-- Hero Background Image -->
+ <img src="4.webp" alt="Hospital Hero" class="absolute inset-0 w-full h-full object-cover z-0 opacity-80">
 
-  <!-- Services / Unit Cards -->
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-blue-900/30 z-10"></div>
+
+
+  <!-- Hero Content -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
+<h1 class="font-bold text-5xl md:text-6xl text-white drop-shadow-lg font-nunito">
+  Comprehensive Diabetes Care
+</h1>
+
+
+
+
+
+    <p class="text-lg md:text-xl text-gray-200 mb-6">Expert care, research, and education under one roof</p>
+    <a href="javascript:void(0)" onclick="openModal()" class="btn-primary inline-block px-6 py-3 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition">
+      Book an Appointment
+    </a>
+  </div>
+</section>
+
+
+  <!-- Services Section -->
   <section id="services" class="max-w-6xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Services</h2>
     <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+      <div class="service-card">
+        <img src="1.png" alt="Diabetes Care" class="w-full h-56 object-cover rounded-lg mb-4">
         <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Care</h3>
         <p class="text-gray-600">Comprehensive care for managing diabetes effectively.</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+      <div class="service-card">
+        <img src="2.png" alt="Multispeciality" class="w-full h-56 object-cover rounded-lg mb-4">
         <h3 class="font-semibold text-lg mb-2 text-teal-700">Multispeciality</h3>
         <p class="text-gray-600">Specialized care across multiple health disciplines.</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+      <div class="service-card">
+        <img src="3.png" alt="Research & Education" class="w-full h-56 object-cover rounded-lg mb-4">
         <h3 class="font-semibold text-lg mb-2 text-teal-700">Research & Education</h3>
         <p class="text-gray-600">Pioneering research and academic programs.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Doctors Section -->
-  <section id="doctors" class="max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Doctors</h2>
-    <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
-        <img src="doctor1.jpeg" alt="Dr. A" class="w-24 h-24 mx-auto rounded-full mb-4">
-        <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. A</h3>
-        <p class="text-gray-600">Endocrinologist</p>
-      </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
-        <img src="doctor2.jpeg" alt="Dr. B" class="w-24 h-24 mx-auto rounded-full mb-4">
-        <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. B</h3>
-        <p class="text-gray-600">Diabetologist</p>
-      </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
-        <img src="doctor3.jpeg" alt="Dr. C" class="w-24 h-24 mx-auto rounded-full mb-4">
-        <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. C</h3>
-        <p class="text-gray-600">Nutritionist</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Courses Section -->
-  <section id="courses" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-teal-50 to-blue-50">
-    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Courses</h2>
-    <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
-        <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Awareness Program</h3>
-        <p class="text-gray-600">Learn to manage diabetes through diet, exercise, and lifestyle changes.</p>
-      </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
-        <h3 class="font-semibold text-lg mb-2 text-teal-700">Nutrition & Meal Planning</h3>
-        <p class="text-gray-600">Understand how to plan balanced meals for diabetes care.</p>
-      </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
-        <h3 class="font-semibold text-lg mb-2 text-teal-700">Advanced Research Seminars</h3>
-        <p class="text-gray-600">For healthcare professionals interested in cutting-edge diabetes research.</p>
       </div>
     </div>
   </section>
@@ -130,42 +189,133 @@
       </form>
     </div>
   </div>
+  <!-- Doctors Section -->
+<section id="doctors" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Doctors</h2>
+  <div class="grid md:grid-cols-3 gap-8 text-center">
+    <div class="doctor-card">
+      <img src="doctor1.jpeg" alt="Dr. A" class="doctor-img rounded-lg mb-4">
+      <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. A</h3>
+      <p class="text-gray-600">Endocrinologist</p>
+    </div>
+    <div class="doctor-card">
+      <img src="doctor2.jpeg" alt="Dr. B" class="doctor-img rounded-lg mb-4">
+      <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. B</h3>
+      <p class="text-gray-600">Diabetologist</p>
+    </div>
+    <div class="doctor-card">
+      <img src="doctor3.jpeg" alt="Dr. C" class="doctor-img rounded-lg mb-4">
+      <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. C</h3>
+      <p class="text-gray-600">Nutritionist</p>
+    </div>
+  </div>
+</section>
+
+<!-- Courses Section -->
+<section id="courses" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-teal-50 to-blue-50">
+  <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Courses</h2>
+  <div class="grid md:grid-cols-3 gap-8 text-center">
+    <div class="course-card p-6">
+      <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Awareness Program</h3>
+      <p class="text-gray-600">Learn to manage diabetes through diet, exercise, and lifestyle changes.</p>
+    </div>
+    <div class="course-card p-6">
+      <h3 class="font-semibold text-lg mb-2 text-teal-700">Nutrition & Meal Planning</h3>
+      <p class="text-gray-600">Understand how to plan balanced meals for diabetes care.</p>
+    </div>
+    <div class="course-card p-6">
+      <h3 class="font-semibold text-lg mb-2 text-teal-700">Advanced Research Seminars</h3>
+      <p class="text-gray-600">For healthcare professionals interested in cutting-edge diabetes research.</p>
+    </div>
+  </div>
+</section>
+<!-- FAQ Section -->
+<section id="faq" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Frequently Asked Questions</h2>
+  <div class="space-y-4">
+    <div class="faq-item border-b py-4">
+      <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
+        What services do you offer?
+        <span class="faq-toggle text-xl">&#x2b;</span>
+      </button>
+      <p class="mt-2 text-gray-600 hidden">We offer comprehensive diabetes care, multispeciality services, and research programs.</p>
+    </div>
+    <div class="faq-item border-b py-4">
+      <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
+        How can I book an appointment?
+        <span class="faq-toggle text-xl">&#x2b;</span>
+      </button>
+      <p class="mt-2 text-gray-600 hidden">You can book through our website form or by calling our hospital reception.</p>
+    </div>
+    <div class="faq-item border-b py-4">
+      <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
+        Do you accept insurance?
+        <span class="faq-toggle text-xl">&#x2b;</span>
+      </button>
+      <p class="mt-2 text-gray-600 hidden">Yes, we accept most major insurance providers. Contact us for details.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-blue-50 to-teal-50">
+  <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Testimonials</h2>
+  <div class="grid md:grid-cols-3 gap-8 text-center">
+    <div class="p-6 bg-white rounded-xl shadow-lg">
+      <p class="text-gray-600 mb-2">"Excellent care and very friendly staff!"</p>
+      <p class="font-semibold text-teal-700">— Patient A</p>
+    </div>
+    <div class="p-6 bg-white rounded-xl shadow-lg">
+      <p class="text-gray-600 mb-2">"Highly professional and attentive doctors."</p>
+      <p class="font-semibold text-teal-700">— Patient B</p>
+    </div>
+    <div class="p-6 bg-white rounded-xl shadow-lg">
+      <p class="text-gray-600 mb-2">"Clean facilities and great guidance for diabetes management."</p>
+      <p class="font-semibold text-teal-700">— Patient C</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Toggle Script -->
+<script>
+document.querySelectorAll('.faq-item button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const p = btn.nextElementSibling;
+    p.classList.toggle('hidden');
+
+    // Change toggle icon
+    const icon = btn.querySelector('.faq-toggle');
+    icon.textContent = p.classList.contains('hidden') ? '+' : '−';
+  });
+});
+</script>
+
 
   <!-- Scripts -->
-  <script type="module">
-    import { db } from "./firebase.js";
-    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
-
-    const form = document.getElementById("enquiryForm");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const { name, email, phone, message } = form;
-      try {
-        await addDoc(collection(db, "hospitalenquiries"), {
-          name: name.value,
-          email: email.value,
-          phone: phone.value,
-          message: message.value,
-          timestamp: new Date()
-        });
-        alert("✅ Enquiry submitted successfully!");
-        form.reset();
-        closeModal();
-      } catch (err) {
-        console.error(err);
-        alert("❌ Failed to submit. Please try again.");
-      }
-    });
-  </script>
-
   <script>
-    function openModal() { document.getElementById("enquiryModal").classList.remove("hidden"); }
-    function closeModal() { document.getElementById("enquiryModal").classList.add("hidden"); }
-
+    // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
-    const nav = document.getElementById('mainNav');
-    menuBtn.addEventListener('click', () => nav.classList.toggle('hidden'));
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+
+    // Modal
+    const modal = document.getElementById('enquiryModal');
+    function openModal() {
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+    function closeModal() {
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-item button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = btn.nextElementSibling;
+        p.classList.toggle('hidden');
+      });
+    });
   </script>
 
 </body>
