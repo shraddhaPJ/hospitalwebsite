@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,33 +6,41 @@
   <title>SRC Hospital Institute</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .btn-primary {
+      @apply bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition;
+    }
+    .logo-circle {
+      @apply w-10 h-10 flex items-center justify-center rounded-full bg-teal-500 text-white font-bold text-lg;
+    }
+  </style>
 </head>
 
-<body class="font-sans">
+<body class="font-sans bg-gradient-to-b from-teal-50 via-white to-blue-50 text-gray-800">
 
   <!-- Header -->
-  <header class="bg-white shadow">
+  <header class="bg-white shadow sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
       
       <!-- Logo -->
       <div class="flex items-center gap-3">
         <div class="logo-circle">C</div>
         <div>
-          <div class="text-lg font-semibold">SRC Diabetes Institute</div>
+          <div class="text-lg font-semibold text-blue-900">SRC Diabetes Institute</div>
           <div class="text-sm text-gray-500">Diabetes Care & Multispeciality</div>
         </div>
       </div>
 
       <!-- Navigation -->
       <nav id="mainNav" class="hidden md:flex gap-6 items-center text-sm">
-        <a href="#services" class="hover:text-blue-600">Services</a>
-        <a href="#doctors" class="hover:text-blue-600">Doctors</a>
-        <a href="#courses" class="hover:text-blue-600">Courses</a>
+        <a href="#services" class="hover:text-teal-600">Services</a>
+        <a href="#doctors" class="hover:text-teal-600">Doctors</a>
+        <a href="#courses" class="hover:text-teal-600">Courses</a>
         <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Enquire</a>
       </nav>
 
       <!-- Mobile menu button -->
-      <button id="menuBtn" class="md:hidden p-2 rounded-md">
+      <button id="menuBtn" class="md:hidden p-2 rounded-md text-blue-800">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
         </svg>
@@ -41,27 +48,36 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative bg-blue-50 py-20 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Comprehensive Diabetes Care</h1>
-    <p class="text-lg text-gray-600 mb-6">Expert care, research, and education under one roof</p>
-    <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Book an Appointment</a>
+  <!-- Hero Section (with background image) -->
+  <section class="relative py-20 text-center">
+    <!-- Background Image -->
+    <img src="hospital-bg.jpeg" alt="Hospital Background" class="absolute inset-0 w-full h-full object-cover">
+    
+    <!-- Overlay for readability -->
+    <div class="absolute inset-0 bg-white bg-opacity-70"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10">
+      <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Comprehensive Diabetes Care</h1>
+      <p class="text-lg text-gray-600 mb-6">Expert care, research, and education under one roof</p>
+      <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Book an Appointment</a>
+    </div>
   </section>
 
   <!-- Services Section -->
   <section id="services" class="max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-semibold text-center mb-10">Our Services</h2>
+    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Services</h2>
     <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
-        <h3 class="font-semibold text-lg mb-2">Diabetes Care</h3>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Care</h3>
         <p class="text-gray-600">Comprehensive care for managing diabetes effectively.</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
-        <h3 class="font-semibold text-lg mb-2">Multispeciality</h3>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Multispeciality</h3>
         <p class="text-gray-600">Specialized care across multiple health disciplines.</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
-        <h3 class="font-semibold text-lg mb-2">Research & Education</h3>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Research & Education</h3>
         <p class="text-gray-600">Pioneering research and academic programs.</p>
       </div>
     </div>
@@ -69,9 +85,9 @@
 
   <!-- Enquiry Modal -->
   <div id="enquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-8 max-w-md w-full relative">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative shadow-lg">
       <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 text-2xl">&times;</button>
-      <h2 class="text-2xl font-semibold mb-4">Enquire Now</h2>
+      <h2 class="text-2xl font-semibold mb-4 text-blue-800">Enquire Now</h2>
       <form id="enquiryForm" class="space-y-4">
         <input type="text" name="name" placeholder="Full Name" class="w-full border p-2 rounded" required>
         <input type="email" name="email" placeholder="Email Address" class="w-full border p-2 rounded" required>
@@ -84,78 +100,75 @@
 
   <!-- Doctors Section -->
   <section id="doctors" class="max-w-6xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-semibold text-center mb-10">Our Doctors</h2>
+    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Doctors</h2>
     <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
         <img src="doctor1.jpeg" alt="Dr. A" class="w-24 h-24 mx-auto rounded-full mb-4">
-        <h3 class="font-semibold text-lg mb-1">Dr. A</h3>
+        <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. A</h3>
         <p class="text-gray-600">Endocrinologist</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
         <img src="doctor2.jpeg" alt="Dr. B" class="w-24 h-24 mx-auto rounded-full mb-4">
-        <h3 class="font-semibold text-lg mb-1">Dr. B</h3>
+        <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. B</h3>
         <p class="text-gray-600">Diabetologist</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
         <img src="doctor3.jpeg" alt="Dr. C" class="w-24 h-24 mx-auto rounded-full mb-4">
-        <h3 class="font-semibold text-lg mb-1">Dr. C</h3>
+        <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. C</h3>
         <p class="text-gray-600">Nutritionist</p>
       </div>
     </div>
   </section>
 
   <!-- Courses Section -->
-  <section id="courses" class="max-w-6xl mx-auto px-6 py-16 bg-gray-50">
-    <h2 class="text-3xl font-semibold text-center mb-10">Our Courses</h2>
+  <section id="courses" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-teal-50 to-blue-50">
+    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Courses</h2>
     <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
-        <h3 class="font-semibold text-lg mb-2">Diabetes Awareness Program</h3>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Awareness Program</h3>
         <p class="text-gray-600">Learn to manage diabetes through diet, exercise, and lifestyle changes.</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
-        <h3 class="font-semibold text-lg mb-2">Nutrition & Meal Planning</h3>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Nutrition & Meal Planning</h3>
         <p class="text-gray-600">Understand how to plan balanced meals for diabetes care.</p>
       </div>
-      <div class="p-6 border rounded-lg shadow hover:shadow-lg">
-        <h3 class="font-semibold text-lg mb-2">Advanced Research Seminars</h3>
+      <div class="p-6 border rounded-lg shadow hover:shadow-lg bg-white">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Advanced Research Seminars</h3>
         <p class="text-gray-600">For healthcare professionals interested in cutting-edge diabetes research.</p>
       </div>
     </div>
   </section>
 
   <!-- Firebase & Form Handling -->
- <!-- Firebase & Form Handling -->
-<script type="module">
-  import { db } from "./firebase.js";
-  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+  <script type="module">
+    import { db } from "./firebase.js";
+    import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 
-  const form = document.getElementById("enquiryForm");
+    const form = document.getElementById("enquiryForm");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const name = form.name.value;
-    const email = form.email.value;
-    const phone = form.phone.value;
-    const message = form.message.value;
+      const name = form.name.value;
+      const email = form.email.value;
+      const phone = form.phone.value;
+      const message = form.message.value;
 
-    try {
-      // Add new enquiry under /hospital enquiries/gSBbmkOBRxKff4YG0dQx/hospitalenquiries
-      await addDoc(
-        collection(db, "hospital enquiries", "gSBbmkOBRxKff4YG0dQx", "hospitalenquiries"),
-        { name, email, phone, message, timestamp: new Date() }
-      );
+      try {
+        await addDoc(
+          collection(db, "hospital enquiries", "gSBbmkOBRxKff4YG0dQx", "hospitalenquiries"),
+          { name, email, phone, message, timestamp: new Date() }
+        );
 
-      alert("✅ Enquiry submitted successfully!");
-      form.reset();
-      closeModal();
-    } catch (error) {
-      console.error("Firestore write failed:", error);
-      alert("❌ Failed to submit. Please try again.");
-    }
-  });
-</script>
-
+        alert("✅ Enquiry submitted successfully!");
+        form.reset();
+        closeModal();
+      } catch (error) {
+        console.error("Firestore write failed:", error);
+        alert("❌ Failed to submit. Please try again.");
+      }
+    });
+  </script>
 
   <!-- Modal & Menu Script -->
   <script>
@@ -174,4 +187,3 @@
 
 </body>
 </html>
-
