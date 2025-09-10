@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SRC Hospital Institute</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
   <style>
     .btn-primary {
       @apply bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition;
@@ -15,13 +14,11 @@
     }
   </style>
 </head>
-
 <body class="font-sans bg-gradient-to-b from-teal-50 via-white to-blue-50 text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-white shadow sticky top-0 z-40">
+  <!-- Header / Navbar -->
+  <header class="bg-white shadow sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      
       <!-- Logo -->
       <div class="flex items-center gap-3">
         <div class="logo-circle">C</div>
@@ -48,23 +45,18 @@
     </div>
   </header>
 
-  <!-- Hero Section (with background image) -->
+  <!-- Hero Section -->
   <section class="relative py-20 text-center">
-    <!-- Background Image -->
     <img src="hospital-bg.jpeg" alt="Hospital Background" class="absolute inset-0 w-full h-full object-cover">
-    
-    <!-- Overlay for readability -->
     <div class="absolute inset-0 bg-white bg-opacity-70"></div>
-
-    <!-- Hero Content -->
-    <div class="relative z-10">
+    <div class="relative z-10 max-w-3xl mx-auto px-6">
       <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Comprehensive Diabetes Care</h1>
       <p class="text-lg text-gray-600 mb-6">Expert care, research, and education under one roof</p>
       <a href="javascript:void(0)" onclick="openModal()" class="btn-primary">Book an Appointment</a>
     </div>
   </section>
 
-  <!-- Services Section -->
+  <!-- Services / Unit Cards -->
   <section id="services" class="max-w-6xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Services</h2>
     <div class="grid md:grid-cols-3 gap-8 text-center">
@@ -82,21 +74,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Enquiry Modal -->
-  <div id="enquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-8 max-w-md w-full relative shadow-lg">
-      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 text-2xl">&times;</button>
-      <h2 class="text-2xl font-semibold mb-4 text-blue-800">Enquire Now</h2>
-      <form id="enquiryForm" class="space-y-4">
-        <input type="text" name="name" placeholder="Full Name" class="w-full border p-2 rounded" required>
-        <input type="email" name="email" placeholder="Email Address" class="w-full border p-2 rounded" required>
-        <input type="tel" name="phone" placeholder="Phone Number" class="w-full border p-2 rounded" required>
-        <textarea name="message" placeholder="Your Message" class="w-full border p-2 rounded"></textarea>
-        <button type="submit" class="btn-primary w-full">Submit</button>
-      </form>
-    </div>
-  </div>
 
   <!-- Doctors Section -->
   <section id="doctors" class="max-w-6xl mx-auto px-6 py-16">
@@ -139,7 +116,22 @@
     </div>
   </section>
 
-  <!-- Firebase & Form Handling -->
+  <!-- Enquiry Modal -->
+  <div id="enquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative shadow-lg">
+      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 text-2xl">&times;</button>
+      <h2 class="text-2xl font-semibold mb-4 text-blue-800">Enquire Now</h2>
+      <form id="enquiryForm" class="space-y-4">
+        <input type="text" name="name" placeholder="Full Name" class="w-full border p-2 rounded" required>
+        <input type="email" name="email" placeholder="Email Address" class="w-full border p-2 rounded" required>
+        <input type="tel" name="phone" placeholder="Phone Number" class="w-full border p-2 rounded" required>
+        <textarea name="message" placeholder="Your Message" class="w-full border p-2 rounded"></textarea>
+        <button type="submit" class="btn-primary w-full">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script type="module">
     import { db } from "./firebase.js";
     import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
@@ -148,41 +140,32 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-
-      const name = form.name.value;
-      const email = form.email.value;
-      const phone = form.phone.value;
-      const message = form.message.value;
-
+      const { name, email, phone, message } = form;
       try {
-        await addDoc(
-          collection(db, "hospital enquiries", "gSBbmkOBRxKff4YG0dQx", "hospitalenquiries"),
-          { name, email, phone, message, timestamp: new Date() }
-        );
-
+        await addDoc(collection(db, "hospitalenquiries"), {
+          name: name.value,
+          email: email.value,
+          phone: phone.value,
+          message: message.value,
+          timestamp: new Date()
+        });
         alert("✅ Enquiry submitted successfully!");
         form.reset();
         closeModal();
-      } catch (error) {
-        console.error("Firestore write failed:", error);
+      } catch (err) {
+        console.error(err);
         alert("❌ Failed to submit. Please try again.");
       }
     });
   </script>
 
-  <!-- Modal & Menu Script -->
   <script>
-    function openModal() {
-      document.getElementById("enquiryModal").classList.remove("hidden");
-    }
-    function closeModal() {
-      document.getElementById("enquiryModal").classList.add("hidden");
-    }
+    function openModal() { document.getElementById("enquiryModal").classList.remove("hidden"); }
+    function closeModal() { document.getElementById("enquiryModal").classList.add("hidden"); }
+
     const menuBtn = document.getElementById('menuBtn');
     const nav = document.getElementById('mainNav');
-    menuBtn.addEventListener('click', () => {
-      nav.classList.toggle('hidden');
-    });
+    menuBtn.addEventListener('click', () => nav.classList.toggle('hidden'));
   </script>
 
 </body>
