@@ -49,6 +49,12 @@
       opacity: 0.95;
     }
 
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     /* Hero Image */
     .hero-img {
       width: 100%;
@@ -75,6 +81,41 @@
     /* Modal transition */
     #enquiryModal {
       transition: opacity 0.25s ease;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid var(--blue-600);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .success-message {
+      background-color: #d1fae5;
+      border: 1px solid #10b981;
+      color: #065f46;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+
+    .error-message {
+      background-color: #fee2e2;
+      border: 1px solid #ef4444;
+      color: #991b1b;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 16px;
     }
   </style>
 </head>
@@ -124,51 +165,52 @@
     </nav>
   </header>
 
- 
   <!-- Hero Section -->
-<section id="hero" class="relative w-full h-screen">
-  <!-- Hero Background Image -->
- <img src="4.webp" alt="Hospital Hero" class="absolute inset-0 w-full h-full object-cover z-0 opacity-80">
+  
+    <!-- Hero Background Image -->
+ <section id="hero" class="relative w-full h-screen bg-cover bg-center"
+         style="background-image: url('4.webp');">
+
+  
+  <!-- Dark overlay -->
+ 
+
+    <!-- Hero Content -->
 
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-blue-900/30 z-10"></div>
+    <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
+    
+      <h1 class="font-bold text-5xl md:text-6xl text-white drop-shadow-lg font-nunito">
+        Comprehensive Diabetes Care
+      </h1>
 
-
-  <!-- Hero Content -->
-  <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
-<h1 class="font-bold text-5xl md:text-6xl text-white drop-shadow-lg font-nunito">
-  Comprehensive Diabetes Care
-</h1>
-
-
-
-
-
-    <p class="text-lg md:text-xl text-gray-200 mb-6">Expert care, research, and education under one roof</p>
-    <a href="javascript:void(0)" onclick="openModal()" class="btn-primary inline-block px-6 py-3 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition">
-      Book an Appointment
-    </a>
-  </div>
-</section>
-
+      <p class="text-lg md:text-xl text-gray-200 mb-6">Expert care, research, and education under one roof</p>
+      <a href="javascript:void(0)" onclick="openModal()" class="btn-primary inline-block px-6 py-3 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition">
+        Book an Appointment
+      </a>
+    </div>
+  </section>
 
   <!-- Services Section -->
   <section id="services" class="max-w-6xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Services</h2>
     <div class="grid md:grid-cols-3 gap-8 text-center">
-      <div class="service-card">
-        <img src="1.png" alt="Diabetes Care" class="w-full h-56 object-cover rounded-lg mb-4">
+      <div class="service-card p-6">
+<div class="w-full h-56 rounded-lg mb-4 bg-cover bg-center"
+           style="background-image: url('1.png');"></div>
         <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Care</h3>
         <p class="text-gray-600">Comprehensive care for managing diabetes effectively.</p>
       </div>
-      <div class="service-card">
-        <img src="2.png" alt="Multispeciality" class="w-full h-56 object-cover rounded-lg mb-4">
+      <div class="service-card p-6">
+        <div class="w-full h-56 rounded-lg mb-4 bg-cover bg-center"
+           style="background-image: url('2.png');"></div>
         <h3 class="font-semibold text-lg mb-2 text-teal-700">Multispeciality</h3>
         <p class="text-gray-600">Specialized care across multiple health disciplines.</p>
       </div>
-      <div class="service-card">
-        <img src="3.png" alt="Research & Education" class="w-full h-56 object-cover rounded-lg mb-4">
+      <div class="service-card p-6">
+<div class="w-full h-56 rounded-lg mb-4 bg-cover bg-center"
+           style="background-image: url('3.png');"></div>
+
         <h3 class="font-semibold text-lg mb-2 text-teal-700">Research & Education</h3>
         <p class="text-gray-600">Pioneering research and academic programs.</p>
       </div>
@@ -177,144 +219,398 @@
 
   <!-- Enquiry Modal -->
   <div id="enquiryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-8 max-w-md w-full relative shadow-lg">
-      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 text-2xl">&times;</button>
+    <div class="bg-white rounded-lg p-8 max-w-md w-full relative shadow-lg mx-4">
+      <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-600 text-2xl hover:text-gray-800">&times;</button>
       <h2 class="text-2xl font-semibold mb-4 text-blue-800">Enquire Now</h2>
+      
       <form id="enquiryForm" class="space-y-4">
-        <input type="text" name="name" placeholder="Full Name" class="w-full border p-2 rounded" required>
-        <input type="email" name="email" placeholder="Email Address" class="w-full border p-2 rounded" required>
-        <input type="tel" name="phone" placeholder="Phone Number" class="w-full border p-2 rounded" required>
-        <textarea name="message" placeholder="Your Message" class="w-full border p-2 rounded"></textarea>
-        <button type="submit" class="btn-primary w-full">Submit</button>
+        <div>
+          <input type="text" name="name" id="name" placeholder="Full Name" class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+        <div>
+          <input type="email" name="email" id="email" placeholder="Email Address" class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+        <div>
+          <input type="tel" name="phone" id="phone" placeholder="Phone Number" class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+        </div>
+        <div>
+          <select name="service" id="service" class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <option value="">Select Service</option>
+            <option value="Diabetes Care">Diabetes Care</option>
+            <option value="Multispeciality">Multispeciality</option>
+            <option value="Research & Education">Research & Education</option>
+            <option value="General Consultation">General Consultation</option>
+          </select>
+        </div>
+        <div>
+          <textarea name="message" id="message" placeholder="Your Message" rows="4" class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+        </div>
+        
+        <button type="submit" id="submitBtn" class="btn-primary w-full py-3 text-white font-semibold rounded-lg">
+          Submit Enquiry
+        </button>
       </form>
+      
+      <!-- Message div for success/error messages -->
+      <div id="messageDiv"></div>
+      
+      <!-- Temporary test button -->
+      <div style="margin-top: 16px; padding: 12px; background: #f0f9ff; border-radius: 8px;">
+        <p style="margin: 0 0 8px 0; font-size: 14px; color: #0369a1;">🔧 Debug Tools:</p>
+        <button type="button" onclick="testFirebase()" style="background: #0369a1; color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+          Test Firebase & List All Data
+        </button>
+        <p style="margin: 8px 0 0 0; font-size: 12px; color: #64748b;">Check browser console after clicking</p>
+      </div>
     </div>
   </div>
+
   <!-- Doctors Section -->
-<section id="doctors" class="max-w-6xl mx-auto px-6 py-16">
+ <section id="doctors" class="max-w-6xl mx-auto px-6 py-16">
   <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Doctors</h2>
   <div class="grid md:grid-cols-3 gap-8 text-center">
-    <div class="doctor-card">
-      <img src="doctor1.jpeg" alt="Dr. A" class="doctor-img rounded-lg mb-4">
+
+    <!-- Doctor 1 -->
+    <div class="doctor-card p-6">
+      <img src="doctor1.jpeg" alt="Dr. A" 
+           class="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow-lg">
       <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. A</h3>
       <p class="text-gray-600">Endocrinologist</p>
     </div>
-    <div class="doctor-card">
-      <img src="doctor2.jpeg" alt="Dr. B" class="doctor-img rounded-lg mb-4">
+
+    <!-- Doctor 2 -->
+    <div class="doctor-card p-6">
+      <img src="doctor2.jpeg" alt="Dr. B" 
+           class="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow-lg">
       <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. B</h3>
       <p class="text-gray-600">Diabetologist</p>
     </div>
-    <div class="doctor-card">
-      <img src="doctor3.jpeg" alt="Dr. C" class="doctor-img rounded-lg mb-4">
+
+    <!-- Doctor 3 -->
+    <div class="doctor-card p-6">
+      <img src="doctor3.jpeg" alt="Dr. C" 
+           class="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow-lg">
       <h3 class="font-semibold text-lg mb-1 text-teal-700">Dr. C</h3>
       <p class="text-gray-600">Nutritionist</p>
     </div>
+
   </div>
 </section>
 
-<!-- Courses Section -->
-<section id="courses" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-teal-50 to-blue-50">
-  <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Courses</h2>
-  <div class="grid md:grid-cols-3 gap-8 text-center">
-    <div class="course-card p-6">
-      <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Awareness Program</h3>
-      <p class="text-gray-600">Learn to manage diabetes through diet, exercise, and lifestyle changes.</p>
-    </div>
-    <div class="course-card p-6">
-      <h3 class="font-semibold text-lg mb-2 text-teal-700">Nutrition & Meal Planning</h3>
-      <p class="text-gray-600">Understand how to plan balanced meals for diabetes care.</p>
-    </div>
-    <div class="course-card p-6">
-      <h3 class="font-semibold text-lg mb-2 text-teal-700">Advanced Research Seminars</h3>
-      <p class="text-gray-600">For healthcare professionals interested in cutting-edge diabetes research.</p>
-    </div>
-  </div>
-</section>
-<!-- FAQ Section -->
-<section id="faq" class="max-w-6xl mx-auto px-6 py-16">
-  <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Frequently Asked Questions</h2>
-  <div class="space-y-4">
-    <div class="faq-item border-b py-4">
-      <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
-        What services do you offer?
-        <span class="faq-toggle text-xl">&#x2b;</span>
-      </button>
-      <p class="mt-2 text-gray-600 hidden">We offer comprehensive diabetes care, multispeciality services, and research programs.</p>
-    </div>
-    <div class="faq-item border-b py-4">
-      <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
-        How can I book an appointment?
-        <span class="faq-toggle text-xl">&#x2b;</span>
-      </button>
-      <p class="mt-2 text-gray-600 hidden">You can book through our website form or by calling our hospital reception.</p>
-    </div>
-    <div class="faq-item border-b py-4">
-      <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
-        Do you accept insurance?
-        <span class="faq-toggle text-xl">&#x2b;</span>
-      </button>
-      <p class="mt-2 text-gray-600 hidden">Yes, we accept most major insurance providers. Contact us for details.</p>
-    </div>
-  </div>
-</section>
 
-<!-- Testimonials Section -->
-<section id="testimonials" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-blue-50 to-teal-50">
-  <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Testimonials</h2>
-  <div class="grid md:grid-cols-3 gap-8 text-center">
-    <div class="p-6 bg-white rounded-xl shadow-lg">
-      <p class="text-gray-600 mb-2">"Excellent care and very friendly staff!"</p>
-      <p class="font-semibold text-teal-700">— Patient A</p>
+  <!-- Courses Section -->
+  <section id="courses" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-teal-50 to-blue-50">
+    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Our Courses</h2>
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div class="course-card p-6">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Diabetes Awareness Program</h3>
+        <p class="text-gray-600">Learn to manage diabetes through diet, exercise, and lifestyle changes.</p>
+      </div>
+      <div class="course-card p-6">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Nutrition & Meal Planning</h3>
+        <p class="text-gray-600">Understand how to plan balanced meals for diabetes care.</p>
+      </div>
+      <div class="course-card p-6">
+        <h3 class="font-semibold text-lg mb-2 text-teal-700">Advanced Research Seminars</h3>
+        <p class="text-gray-600">For healthcare professionals interested in cutting-edge diabetes research.</p>
+      </div>
     </div>
-    <div class="p-6 bg-white rounded-xl shadow-lg">
-      <p class="text-gray-600 mb-2">"Highly professional and attentive doctors."</p>
-      <p class="font-semibold text-teal-700">— Patient B</p>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="max-w-6xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+      <div class="faq-item border-b py-4">
+        <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
+          What services do you offer?
+          <span class="faq-toggle text-xl">&#x2b;</span>
+        </button>
+        <p class="mt-2 text-gray-600 hidden">We offer comprehensive diabetes care, multispeciality services, and research programs.</p>
+      </div>
+      <div class="faq-item border-b py-4">
+        <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
+          How can I book an appointment?
+          <span class="faq-toggle text-xl">&#x2b;</span>
+        </button>
+        <p class="mt-2 text-gray-600 hidden">You can book through our website form or by calling our hospital reception.</p>
+      </div>
+      <div class="faq-item border-b py-4">
+        <button class="w-full text-left font-semibold text-teal-700 flex justify-between items-center">
+          Do you accept insurance?
+          <span class="faq-toggle text-xl">&#x2b;</span>
+        </button>
+        <p class="mt-2 text-gray-600 hidden">Yes, we accept most major insurance providers. Contact us for details.</p>
+      </div>
     </div>
-    <div class="p-6 bg-white rounded-xl shadow-lg">
-      <p class="text-gray-600 mb-2">"Clean facilities and great guidance for diabetes management."</p>
-      <p class="font-semibold text-teal-700">— Patient C</p>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="max-w-6xl mx-auto px-6 py-16 bg-gradient-to-r from-blue-50 to-teal-50">
+    <h2 class="text-3xl font-semibold text-center mb-10 text-blue-800">Testimonials</h2>
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div class="p-6 bg-white rounded-xl shadow-lg">
+        <p class="text-gray-600 mb-2">"Excellent care and very friendly staff!"</p>
+        <p class="font-semibold text-teal-700">— Patient A</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow-lg">
+        <p class="text-gray-600 mb-2">"Highly professional and attentive doctors."</p>
+        <p class="font-semibold text-teal-700">— Patient B</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow-lg">
+        <p class="text-gray-600 mb-2">"Clean facilities and great guidance for diabetes management."</p>
+        <p class="font-semibold text-teal-700">— Patient C</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FAQ Toggle Script -->
-<script>
-document.querySelectorAll('.faq-item button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const p = btn.nextElementSibling;
-    p.classList.toggle('hidden');
+  <!-- Firebase Scripts -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
 
-    // Change toggle icon
-    const icon = btn.querySelector('.faq-toggle');
-    icon.textContent = p.classList.contains('hidden') ? '+' : '−';
-  });
-});
-</script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDhQu4Cm9_6s4-T0AIsPS92ilwXbJHdPpA",
+      authDomain: "realestate-57b87.firebaseapp.com",
+      projectId: "realestate-57b87",
+      storageBucket: "realestate-57b87.appspot.com",
+      messagingSenderId: "718597394625",
+      appId: "1:718597394625:web:59ea900fad8ee603790440",
+      measurementId: "G-4B7GVMXH1S"
+    };
 
+    // Initialize Firebase
+    console.log("Initializing Firebase...");
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    console.log("Firebase initialized successfully");
 
-  <!-- Scripts -->
+    // Function to submit enquiry to Firebase
+    async function submitEnquiry(formData) {
+      console.log("Attempting to submit enquiry:", formData);
+      
+      try {
+        console.log("Creating document reference for nested path...");
+        
+        // Store in your specified nested path: /hospital/enquiries/gSBbmkOBRxKff4YG0dQx/enquiries
+        const docRef = await addDoc(collection(db, "hospital", "enquiries", "gSBbmkOBRxKff4YG0dQx", "enquiries"), {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+          timestamp: serverTimestamp(),
+          status: 'new',
+          submittedAt: new Date().toISOString()
+        });
+        
+        console.log("Document written with ID: ", docRef.id);
+        console.log("Stored in path: /hospital/enquiries/gSBbmkOBRxKff4YG0dQx/enquiries/" + docRef.id);
+        return { success: true, id: docRef.id };
+        
+      } catch (error) {
+        console.error("Error with nested path:", error);
+        
+        // Fallback: Try creating the parent documents first
+        try {
+          console.log("Trying to create parent documents first...");
+          
+          // First ensure the parent document exists
+          await setDoc(doc(db, "hospital", "enquiries"), {
+            created: serverTimestamp(),
+            description: "Hospital enquiries container"
+          }, { merge: true });
+          
+          // Then ensure the specific hospital document exists
+          await setDoc(doc(db, "hospital", "enquiries", "gSBbmkOBRxKff4YG0dQx"), {
+            hospitalName: "SRC Diabetes Institute",
+            created: serverTimestamp()
+          }, { merge: true });
+          
+          // Now try adding to the subcollection
+          const docRef = await addDoc(collection(db, "hospital", "enquiries", "gSBbmkOBRxKff4YG0dQx", "enquiries"), {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            service: formData.service,
+            message: formData.message,
+            timestamp: serverTimestamp(),
+            status: 'new',
+            submittedAt: new Date().toISOString()
+          });
+          
+          console.log("Document created after setting up parent docs, ID: ", docRef.id);
+          console.log("Final path: /hospital/enquiries/gSBbmkOBRxKff4YG0dQx/enquiries/" + docRef.id);
+          return { success: true, id: docRef.id };
+          
+        } catch (fallbackError) {
+          console.error("Fallback method failed:", fallbackError);
+          
+          // Last resort: simple collection with metadata
+          try {
+            console.log("Using simple collection as last resort...");
+            const simpleRef = await addDoc(collection(db, "hospital_enquiries"), {
+              name: formData.name,
+              email: formData.email,
+              phone: formData.phone,
+              service: formData.service,
+              message: formData.message,
+              timestamp: serverTimestamp(),
+              status: 'new',
+              hospitalId: 'gSBbmkOBRxKff4YG0dQx',
+              hospitalName: 'SRC Diabetes Institute',
+              submittedAt: new Date().toISOString(),
+              originalPath: '/hospital/enquiries/gSBbmkOBRxKff4YG0dQx/enquiries'
+            });
+            
+            console.log("Stored in simple collection with ID: ", simpleRef.id);
+            return { success: true, id: simpleRef.id };
+            
+          } catch (lastError) {
+            console.error("All methods failed:", lastError);
+            return { success: false, error: lastError.message };
+          }
+        }
+      }
+    }
+
+    // Handle form submission
+    document.getElementById('enquiryForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const messageDiv = document.getElementById('messageDiv');
+      
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        service: document.getElementById('service').value,
+        message: document.getElementById('message').value.trim()
+      };
+
+      // Validate form data
+      if (!formData.name || !formData.email || !formData.phone || !formData.service || !formData.message) {
+        messageDiv.innerHTML = '<div class="error-message">Please fill in all fields.</div>';
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<div class="spinner"></div>Submitting...';
+      messageDiv.innerHTML = '';
+
+      try {
+        // Submit to Firebase
+        const result = await submitEnquiry(formData);
+        
+        if (result.success) {
+          // Show success message
+          messageDiv.innerHTML = '<div class="success-message">✅ Thank you! Your enquiry has been submitted successfully. We will contact you soon.</div>';
+          
+          // Reset form
+          document.getElementById('enquiryForm').reset();
+          
+          // Close modal after 3 seconds
+          setTimeout(() => {
+            closeModal();
+            messageDiv.innerHTML = '';
+          }, 3000);
+          
+        } else {
+          // Show error message
+          messageDiv.innerHTML = '<div class="error-message">❌ Sorry, there was an error submitting your enquiry. Please try again.</div>';
+        }
+        
+      } catch (error) {
+        console.error('Submission error:', error);
+        messageDiv.innerHTML = '<div class="error-message">❌ Network error. Please check your connection and try again.</div>';
+      } finally {
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Submit Enquiry';
+      }
+    });
+
+    // Make functions available globally for onclick handlers
+    window.submitEnquiry = submitEnquiry;
+  </script>
+
+  <!-- General Scripts -->
   <script>
     // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
     menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
 
-    // Modal
+    // Modal functions
     const modal = document.getElementById('enquiryModal');
     function openModal() {
       modal.classList.remove('hidden');
       document.body.classList.add('overflow-hidden');
+      // Clear any previous messages
+      document.getElementById('messageDiv').innerHTML = '';
     }
+    
     function closeModal() {
       modal.classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
+      // Reset form and messages
+      document.getElementById('enquiryForm').reset();
+      document.getElementById('messageDiv').innerHTML = '';
+      document.getElementById('submitBtn').disabled = false;
+      document.getElementById('submitBtn').innerHTML = 'Submit Enquiry';
     }
 
     // FAQ toggle
     document.querySelectorAll('.faq-item button').forEach(btn => {
       btn.addEventListener('click', () => {
         const p = btn.nextElementSibling;
+        const icon = btn.querySelector('.faq-toggle');
+        
         p.classList.toggle('hidden');
+        icon.textContent = p.classList.contains('hidden') ? '+' : '−';
       });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Close mobile menu if open
+          mobileNav.classList.add('hidden');
+        }
+      });
+    });
+
+    // Make modal functions global for onclick handlers
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+
+    // Close modal on outside click
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
     });
   </script>
 
